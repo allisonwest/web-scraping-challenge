@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars!</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head> 
+<body class="text-white" style="background-color: rgb(13, 105, 25);">
+    <div class="container">
+        <!-- Jumbotron -->
+        <div class="jumbotron text-center" style="background-image: url(https://c4.wallpaperflare.com/wallpaper/411/990/383/tv-show-looney-tunes-marvin-the-martian-wallpaper-preview.jpg); height: 300px; background-position: center; background-size: cover;">
+            <h1 class="display-3"><b>Mission to Mars!</b></h1>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape It!</a></p>
+        </div>
+        <!-- NASA Mars News -->
+        <div class="container">
+            <div class="row" id="mars-news">
+                <div class="media">
+                    <div class="media-body">
+                        <h4>Latest Mars News</h4>
+                        <h5 style="color: #DC143C">{{mars.news_title}}</h5>
+                        <p style="color: #8B0000">{{mars.news_paragraph}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>   
+        <!-- JPL Mars Space Images - Featured Image -->
+        <div class="container">
+            <div class="row" id="mars-featured-image">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                <h4>Featured Mars Image</h4>
+                    <!-- If Images are False/None/Non-Existent, Then Default to Error Message -->
+                    <img src="{{mars.Featured_Image | default('static/images/error.png', true) }}" class="img-responsive" style="max-width:100%; max-height: auto;" alt="Mars Featured Image"/>
+                </div>
+                    <!-- Mars Facts -->
+                    <br>
+                    <div class="row" id="mars-facts">
+                        <div class="col-md-12">
+                            <h4>Mars Facts</h4>
+                            {{mars.Mars_Facts | safe}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Mars Hemispheres -->
+        <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                  <h2 class="heading">Mars Hemispheres</h2>
+              </div>
+              <div class="col-md-6">
+                  {% for x in mars.hemisphere_urls [0]%}
+                  <h4>{{x.title}}</h4>
+                  <img src="{{x.img_url}}">
+                  {% endfor %}
+      
+                  {% for x in mars.hemisphere_urls [1]%}
+                  <h4>{{x.title}}</h4> 
+                  <img src="{{x.img_url}}">
+                  {% endfor %}
+              </div>
+              <div class="col-md-6">
+                  {% for x in mars.hemisphere_urls [2]%}
+                  <h4>{{x.title}}</h4> 
+                  <img src="{{x.img_url}}">
+                  {% endfor %}
+                  
+                  {% for x in hemisphere_urls[3] %}
+                  <h4>{{x.title}}</h4>
+                  <img src="{{x.img_url}}">
+                  {% endfor %}
+                </div>  
+            </div>
+        </div>
+    </div>
+</body>
+</html>
